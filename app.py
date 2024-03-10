@@ -41,8 +41,6 @@ def set_bg(path):
             font-weight: bold !important;
             color: #FF6EC7 !important;
             background-color: #FFFFFF; /* Add background color */
-            padding: 5px 10px; /* Add padding for better readability */
-            border-radius: 5px; /* Add border radius for rounded corners */
         }}
         </style>
         """,
