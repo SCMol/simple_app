@@ -31,7 +31,7 @@ def set_bg(path):
             padding: 20px;
         }}
         .fish-gif {{
-            width: 400px; /* Adjust the width as needed */
+            width: 100px; /* Adjust the width as needed */
             height: auto;
             margin: 0 10px; /* Add some margin between each fish GIF */
         }}
@@ -39,8 +39,14 @@ def set_bg(path):
         body, p, label, .stMarkdown {{
             font-size: 24px !important;
             font-weight: bold !important;
-            color: #FF6EC7 !important;
-            background-color: #FFFFFF; /* Add background color */
+            color: #39FF14 !important;
+            background-color: #000000; /* Add background color */
+            padding: 5px 10px; /* Add padding for better readability */
+            border-radius: 5px; /* Add border radius for rounded corners */
+        }}
+        /* Adjusting the color for main headers */
+        .main-header {{
+            color: #39FF14 !important;
         }}
         </style>
         """,
@@ -116,9 +122,12 @@ def main():
 
     app_mode = st.sidebar.selectbox("Choose the app mode", ["Home Screen", "Health Check", "Species ID"])
 
+    # Apply different color to main headers
     st.title("Fish Image Analyzer")
+    st.markdown('<p class="main-header">Health Check</p>', unsafe_allow_html=True)
+
     if app_mode == "Home Screen":
-        st.markdown("Welcome to the Fish Image Analyzer! Choose a mode from the sidebar.", unsafe_allow_html=True)
+        st.markdown('<p style="background-color: #000000; padding: 5px 10px; border-radius: 5px;">Welcome to the Fish Image Analyzer! Choose a mode from the sidebar.</p>', unsafe_allow_html=True)
     elif app_mode == "Health Check":
         health_check_interface()
     elif app_mode == "Species ID":
