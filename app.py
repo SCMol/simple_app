@@ -3,6 +3,15 @@ import requests
 import base64
 
 # Load and set the background image
+import streamlit as st
+import requests
+import base64
+
+import streamlit as st
+import requests
+import base64
+
+# Load and set the background image
 def set_bg(path):
     with open(path, "rb") as file:
         base64_img = base64.b64encode(file.read()).decode("utf-8")
@@ -16,17 +25,19 @@ def set_bg(path):
         .sidebar .sidebar-content {{
             background-color: #5D6ED4;
         }}
-        .title-container {{
+        .fish-container {{
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            padding: 20px;
         }}
-        .gif-container {{
-            max-width: 20%;
+        .fish-gif {{
+            width: 400px; /* Adjust the width as needed */
+            height: auto;
+            margin: 0 10px; /* Add some margin between each fish GIF */
         }}
         /* Adjusting the font size, weight, and color for all text */
         body, p, label, .stMarkdown {{
-            font-size: 30px !important;
+            font-size: 24px !important;
             font-weight: bold !important;
             color: #FF6EC7 !important;
         }}
@@ -34,6 +45,7 @@ def set_bg(path):
         """,
         unsafe_allow_html=True
     )
+
 
 # Define the API URLs
 HEALTH_CHECK_API_URL = "https://fishapi-rhatlat23q-ew.a.run.app/analyze-image"  # Replace with the actual Health Check API URL
@@ -95,20 +107,11 @@ def main():
         </style>
         """, unsafe_allow_html=True)
 
-    # Load and display the GIFs
-    left_fish_gif = open("fish-spinning.gif", "rb")
-    right_fish_gif = open("fish-spinning.gif", "rb")
+    # Load the fish GIF
+    fish_gif = open("fish-spinning.gif", "rb").read()
 
-    st.markdown("""
-    <div class="title-container">
-        <div class="gif-container">
-            <img src="data:image/gif;base64,{}" alt="Left Fish GIF" width="100%">
-        </div>
-        <div class="gif-container">
-            <img src="data:image/gif;base64,{}" alt="Right Fish GIF" width="100%">
-        </div>
-    </div>
-    """.format(base64.b64encode(left_fish_gif.read()).decode(), base64.b64encode(right_fish_gif.read()).decode()), unsafe_allow_html=True)
+    # Display the fish GIF multiple times in a horizontal row
+    st.markdown('<p class="fish-container">' + ' '.join([f'<img class="fish-gif" src="data:image/gif;base64,{base64.b64encode(fish_gif).decode()}" alt="Fish GIF">' for _ in range(5)]) + '</p>', unsafe_allow_html=True)
 
     app_mode = st.sidebar.selectbox("Choose the app mode", ["Home Screen", "Health Check", "Species ID"])
 
